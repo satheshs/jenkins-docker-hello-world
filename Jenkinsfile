@@ -2,8 +2,8 @@ pipeline {
     agent {
         docker {image 'gnuchu/hello-world'}
     }
-    stage {
-        stages {
+    stages {
+        stage {
             steps {
                 sh 'curl localhost:80'
             }
