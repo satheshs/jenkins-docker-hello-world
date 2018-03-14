@@ -3,7 +3,7 @@ pipeline {
         docker {image 'gnuchu/hello-world'}
     }
     stages {
-        stage {
+        stage('Hello, World') {
             steps {
                 sh 'curl localhost:80'
             }
