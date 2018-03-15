@@ -9,7 +9,7 @@ pipeline {
         stage('Hello, World') {
             steps {
                 echo "Build step"
-                sh 'hostname'
+                sh 'ps -ef'
             }
         }
     }
