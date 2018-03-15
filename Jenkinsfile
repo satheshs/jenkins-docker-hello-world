@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker {image 'hello-world'}
+        docker {image 'gnuchu/hello-world'}
     }
     stages {
         stage('Hello, World') {
