@@ -6,8 +6,7 @@ pipeline {
         stage('Hello, World') {
             steps {
                 echo "Build step"
-                sh 'curl localhost:80'
-                sh 'curl localhost:5000'
+                sh 'ls -l'
             }
         }
     }
