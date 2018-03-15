@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('Hello, World') {
             steps {
-                //sh 'curl localhost:80'
-                echo "Null build step"
+                echo "Build step"
+                sh 'curl localhost:80'
             }
         }
     }
