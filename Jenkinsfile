@@ -86,7 +86,14 @@ pipeline {
 		}
             steps {
                 deleteDir()
-                git credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: "${GIT_URL}"
+		checkout changelog: false, 
+                poll: false, 
+                scm: [$class: 'GitSCM', 
+                branches: [[name: '**']], 
+                doGenerateSubmoduleConfigurations: false, 
+                extensions: [], 
+                submoduleCfg: [], 
+                userRemoteConfigs: [[credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: '${GIT_URL}']]]
             }
         }
         stage('Build the image') {
