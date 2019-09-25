@@ -49,6 +49,26 @@ def getVersionFromGitCommit() {
     echo "The tag is ....... $git_commit"
     return "$git_commit"
 }
+
+def confirmBuild() {
+    requiresConfirmation = getConfigValue("requiresConfirmation")
+
+    if (!requiresConfirmation) {
+        return
+    }
+
+    try {
+        timeout(time: 5, unit: 'MINUTES') {
+            input(
+                message: "Confirm build?"
+            )
+        }
+    } 
+	catch (err) {
+        error("Build aborted")
+        return
+    }
+}
     
 pipeline {
     agent any
@@ -64,7 +84,8 @@ pipeline {
         }
         stage('Build the image') {
             steps {
-                echo "Build step"               
+                echo "Build step" 
+                confirmBuild()
                 sh "docker build -t ${getComputedImageFullName()} -f Dockerfile ."
             }
         }
