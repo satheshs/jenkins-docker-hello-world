@@ -10,9 +10,10 @@ pipeline {
                 git credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: "${GIT_URL}"
             }
         }
-        stage('Hello, World') {
+        stage('Build the image') {
             steps {
                 echo "Build step"
+                sh "docker build -t helloworld:latest -f Dockerfile ."
             }
         }
     }
