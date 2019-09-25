@@ -112,7 +112,7 @@ pipeline {
 	    		}
 	    	}
 			steps {
-				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '448091595882.dkr.ecr.us-east-2.amazonaws.com') {
+				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: 'https://448091595882.dkr.ecr.us-east-2.amazonaws.com') {
 				sh "docker push ${getComputedImageFullName()}"
 				sh "docker rmi ${getComputedImageFullName()}"
 				}
