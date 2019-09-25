@@ -1,15 +1,20 @@
 pipeline {
-    agent {
-        docker {
-            image 'gnuchu/hello-world'
-            args '-p 5000:80'
+    agent any
+        environment {
+        GIT_URL = 'git@github.com:satheshs/jenkins-docker-hello-world.git'
+        }
+        stage('checkout') {
+            steps {
+                deleteDir()
+                git branch: 'master',
+                        url: "${GIT_URL}"
+            }
         }
     }
     stages {
         stage('Hello, World') {
             steps {
                 echo "Build step"
-                sh 'ps -ef'
             }
         }
     }
