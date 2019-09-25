@@ -102,20 +102,6 @@ pipeline {
                 sh "docker build -t ${getComputedImageFullName()} -f Dockerfile ."
             }
         }
-	stage('Push Docker image to registry') {
-	    	when {
-	    	     anyOf {
-	    		branch "develop"
-	    		branch "release/*"
-	    		branch "master"
-	    		}
-	    	}
-	 steps {
-			withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '448091595882.dkr.ecr.us-east-2.amazonaws.com') {
-			sh "docker push ${getComputedImageFullName()}"
-			sh "docker rmi ${getComputedImageFullName()}"
-                	}
-	}
 	stage('Clean up Workspace') {
             	steps {
 			cleanWs()
