@@ -1,6 +1,6 @@
 // The URL of the Docker registry images will be pushed into during the build process.
-dockerRegistry = "448091595882.dkr.ecr.us-east-2.amazonaws.com"
-dockerRegistryUrl = "https://448091595882.dkr.ecr.us-east-2.amazonaws.com"
+dockerRegistryUrl = "448091595882.dkr.ecr.us-east-2.amazonaws.com"
+
 
 // The name of the Docker image we'll push.
 dockerImageName= "apache"
@@ -41,7 +41,7 @@ def getConfigValue(name) {
 
 def getComputedImageFullName() {
     rawVersion = getVersionFromGitCommit()
-    return "${dockerRegistry}/${dockerImageName}:${rawVersion}"
+    return "${dockerRegistryUrl}/${dockerImageName}:${rawVersion}"
 }
 
 def getVersionFromGitCommit() {
@@ -111,7 +111,7 @@ pipeline {
 	    		}
 	    	}
 			steps {
-				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '"${dockerRegistryUrl}"') {
+				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: 'https://448091595882.dkr.ecr.us-east-2.amazonaws.com') {
 				sh "docker push ${getComputedImageFullName()}"
 				sh "docker rmi ${getComputedImageFullName()}"
 				}
