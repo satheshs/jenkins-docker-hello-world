@@ -49,42 +49,6 @@ def getVersionFromGitCommit() {
     echo "The tag is ....... $git_commit"
     return "$git_commit"
 }
-
-def branchNeedsImageTaggedWithVersion() {
-	branch = env.BRANCH_NAME
-
-	if (branch.startsWith("release/") || branch.startsWith("master/")) {
-		return true
-	}
-
-	return false
-}
-
-
-def checkGitCommitMessage() {
-	if (!branchNeedsImageTaggedWithVersion()) {
-		return
-	}
-
-def confirmBuild() {
-    requiresConfirmation = getConfigValue("requiresConfirmation")
-
-    if (!requiresConfirmation) {
-        return
-    }
-
-    try {
-        timeout(time: 5, unit: 'MINUTES') {
-            input(
-                message: "Confirm build?"
-            )
-        }
-    } catch (err) {
-        error("Build aborted")
-
-        return
-    }
-}
     
 pipeline {
     agent any
