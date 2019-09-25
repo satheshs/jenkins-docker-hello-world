@@ -3,6 +3,7 @@ pipeline {
         environment {
         GIT_URL = 'git@github.com:satheshs/jenkins-docker-hello-world.git'
         }
+    stages {
         stage('checkout') {
             steps {
                 deleteDir()
@@ -10,7 +11,6 @@ pipeline {
                         url: "${GIT_URL}"
             }
         }
-    stages {
         stage('Hello, World') {
             steps {
                 echo "Build step"
