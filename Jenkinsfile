@@ -1,4 +1,5 @@
 // The URL of the Docker registry images will be pushed into during the build process.
+dockerRegistry = "448091595882.dkr.ecr.us-east-2.amazonaws.com"
 dockerRegistryUrl = "https://448091595882.dkr.ecr.us-east-2.amazonaws.com"
 
 // The name of the Docker image we'll push.
@@ -40,7 +41,7 @@ def getConfigValue(name) {
 
 def getComputedImageFullName() {
     rawVersion = getVersionFromGitCommit()
-    return "${dockerRegistryUrl}/${dockerImageName}:${rawVersion}"
+    return "${dockerRegistry}/${dockerImageName}:${rawVersion}"
 }
 
 def getVersionFromGitCommit() {
