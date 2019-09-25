@@ -4,9 +4,10 @@ dockerRegistryUrl = "448091595882.dkr.ecr.us-east-2.amazonaws.com"
 // The name of the Docker image we'll push.
 dockerImageName= "apache"
 
-
 // The name of the product. Assumed to be the name of the Git repo. Also used in creating the messages for sending to the Slack channel.
 productName = "edw2.0"
+
+GIT_URL = 'https://github.com/satheshs/jenkins-docker-hello-world.git'
 
 config = [
     "master": [
@@ -72,9 +73,6 @@ def confirmBuild() {
     
 pipeline {
     agent any
-        environment {
-        GIT_URL = 'https://github.com/satheshs/jenkins-docker-hello-world.git'
-        }
     stages {
         stage('checkout') {
 		when {
@@ -86,14 +84,7 @@ pipeline {
 		}
             steps {
                 deleteDir()
-		checkout changelog: false, 
-                poll: false, 
-                scm: [$class: 'GitSCM', 
-                branches: [[name: '**']], 
-                doGenerateSubmoduleConfigurations: false, 
-                extensions: [], 
-                submoduleCfg: [], 
-                userRemoteConfigs: [[credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: '${GIT_URL}']]]
+		git credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: "${GIT_URL}"
             }
         }
         stage('Build the image') {
