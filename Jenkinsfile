@@ -53,24 +53,26 @@ def getVersionFromGitCommit() {
 }
 
 def confirmBuild() {
-    requiresConfirmation = getConfigValue("requiresConfirmation")
+	requiresConfirmation = getConfigValue("requiresConfirmation")
 
-    if (!requiresConfirmation) {
-        return
-    }
+	if (!requiresConfirmation) {
+		return
+	}
 
-    try {
-        timeout(time: 5, unit: 'MINUTES') {
-            input(
-                message: "Confirm build?"
-            )
-        }
-    } 
-	catch (err) {
-        error("Build aborted")
-        return
-    }
-}
+	sendSlackJenkinsChannelMessage("*WARNING:* build requires confirmation; please see ${env.BUILD_URL} for details")
+
+	try {
+		timeout(time: 5, unit: 'MINUTES') {
+			input(
+				message: "Confirm build?"
+			)
+		}
+	} catch (err) {
+		sendSlackJenkinsChannelMessage("*ERROR:* build aborted")
+		error("Build aborted")
+
+		return
+	
     
 pipeline {
     agent any
