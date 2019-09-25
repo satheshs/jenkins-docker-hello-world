@@ -77,12 +77,26 @@ pipeline {
         }
     stages {
         stage('checkout') {
+		when {
+		    anyOf {
+			branch "develop"
+			branch "release/*"
+			branch "master"
+			}
+		}
             steps {
                 deleteDir()
                 git credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: "${GIT_URL}"
             }
         }
         stage('Build the image') {
+		when {
+		    anyOf {
+			branch "develop"
+			branch "release/*"
+			branch "master"
+			}
+		}
             steps {
                 echo "Build step" 
                 confirmBuild()
