@@ -111,7 +111,7 @@ pipeline {
 	    		}
 	    	}
 			steps {
-				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '${dockerRegistryUrl}') {
+				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '"${dockerRegistryUrl}"') {
 				sh "docker push ${getComputedImageFullName()}"
 				sh "docker rmi ${getComputedImageFullName()}"
 				}
