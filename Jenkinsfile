@@ -1,7 +1,7 @@
 pipeline {
     agent any
         environment {
-        GIT_URL = 'git@github.com:satheshs/jenkins-docker-hello-world.git'
+        GIT_URL = 'https://github.com/satheshs/jenkins-docker-hello-world.git'
         }
     stages {
         stage('checkout') {
