@@ -59,8 +59,6 @@ def confirmBuild() {
 		return
 	}
 
-	sendSlackJenkinsChannelMessage("*WARNING:* build requires confirmation; please see ${env.BUILD_URL} for details")
-
 	try {
 		timeout(time: 5, unit: 'MINUTES') {
 			input(
@@ -68,10 +66,10 @@ def confirmBuild() {
 			)
 		}
 	} catch (err) {
-		sendSlackJenkinsChannelMessage("*ERROR:* build aborted")
 		error("Build aborted")
 
 		return
+	}
 	
     
 pipeline {
