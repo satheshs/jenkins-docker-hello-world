@@ -1,5 +1,5 @@
 // The URL of the Docker registry images will be pushed into during the build process.
-dockerRegistryUrl = "448091595882.dkr.ecr.us-east-2.amazonaws.com"
+dockerRegistryUrl = "https://448091595882.dkr.ecr.us-east-2.amazonaws.com"
 
 // The name of the Docker image we'll push.
 dockerImageName= "apache"
@@ -110,7 +110,7 @@ pipeline {
 	    		}
 	    	}
 			steps {
-				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: 'https://448091595882.dkr.ecr.us-east-2.amazonaws.com') {
+				withDockerRegistry(credentialsId: 'docker-ecr-credentials', url: '${dockerRegistryUrl}') {
 				sh "docker push ${getComputedImageFullName()}"
 				sh "docker rmi ${getComputedImageFullName()}"
 				}
