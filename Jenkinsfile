@@ -100,9 +100,7 @@ pipeline {
         }
         stage('Build the image') {
             steps {
-                echo "Build step"
-                checkGitCommitMessage()
-                confirmBuild()                
+                echo "Build step"               
                 sh "docker build -t ${getComputedImageFullName()} -f Dockerfile ."
             }
         }
