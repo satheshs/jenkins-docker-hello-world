@@ -10,12 +10,10 @@ pipeline {
                         url: "${GIT_URL}"
             }
         }
-    }
     stages {
         stage('Hello, World') {
             steps {
                 echo "Build step"
             }
         }
-    }
 }
