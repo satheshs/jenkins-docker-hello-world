@@ -7,8 +7,7 @@ pipeline {
         stage('checkout') {
             steps {
                 deleteDir()
-                git branch: 'master',
-                        url: "${GIT_URL}"
+                git credentialsId: 'b728e187-9a27-4afd-9aa9-8736634134b4', url: 'https://github.com/satheshs/jenkins-docker-hello-world.git'
             }
         }
         stage('Hello, World') {
