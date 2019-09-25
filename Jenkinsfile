@@ -52,7 +52,7 @@ def getVersionFromGitCommit() {
 
 
 pipeline {
-    agent { label 'linux'}
+    agent any
         environment {
         GIT_URL = 'https://github.com/satheshs/jenkins-docker-hello-world.git'
         }
